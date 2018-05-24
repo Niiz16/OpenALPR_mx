@@ -29,8 +29,8 @@ Descargar [Tesseract]
 Configuration is done.
 You can now build and install tesseract by running:
 ```sh
-		$ make
-		$ sudo make install
+    $ make
+    $ sudo make install
 ```
 
 Training tools can be build and installed (after building of tesseract) with:
