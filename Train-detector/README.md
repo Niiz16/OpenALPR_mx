@@ -52,7 +52,7 @@ Hay que poner la dirección de OPENCV en el archivo de python
 'country' = directorio de entrada de imágenes positivas de las placas
 'negative' = directorio de salida de imágenes negativas
 'positive' = directiorio de salida de imágenes positivas
-'WIDTH', HEIGHT estan en cm
+'WIDTH', 'HEIGHT' = estan en cm
 ```
 Para encontrar las direcciones usé el comando find en ubuntu
 
