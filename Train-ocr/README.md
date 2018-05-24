@@ -12,6 +12,7 @@ El entramiento de **OpenALPR OCR** es una manera rápida de mejorar la precisió
   Para obtener más información acerca del entranamiento usando Tesseract OCR, puede leer el siguiente **[Tutorial]**.
 ### Pasos 
 1. Clonamos el repositorio [GitHub]
+
     En el folder de "eu/input" hay archivos tif y box. 
     Para cada fuente debemos tener al menos un archivo tif y un archivo box
     Para las placas de un país podemos tener muchas fuentes y cada una debe tener diferente nombre.
@@ -19,10 +20,12 @@ El entramiento de **OpenALPR OCR** es una manera rápida de mejorar la precisió
     >La convención es l[country_code].[fontname].exp[pagenumber].box
     
    > Por ejemplo:
+
       Para la fuente de las placas de alemanas (europa) deberá verse de la siguiente forma:
       leu.germany.exp0.box
     
     ### TIF
+
  En este archivo hay muchas letras y números similares. La mejor forma de generar esto es de imágenes de las placas actuales.
 
 [OpenALPR] tiene algunas herramientas para generar estos archivos de entrada.
@@ -33,6 +36,7 @@ El entramiento de **OpenALPR OCR** es una manera rápida de mejorar la precisió
                   Cada fuente única debe estar en un archivo diferente para alcanzar una mayor precisión
 
 2. Añadiendo un nuevo País
+
     Para entrenar OCR por un país completamente nuevo, necesitaremos configurar las dimensiones de la placa y los carácteres.
         
     *  Añadir un nuevo archivo en runtime_data/config/ con su código de país de 2 dígitos. Puedes copiar y pegar una sección de otro país. 
@@ -77,22 +81,27 @@ El entramiento de **OpenALPR OCR** es una manera rápida de mejorar la precisió
               NORMA Oficial Mexicana NOM-001-SCT-2-2016, Placas metálicas, calcomanías de identificación y tarjetas de circulación empleadas en automóviles, tractocamiones, autobuses, camiones, motocicletas, remolques, semirremolques, convertidores y grúas, matriculados en la República Mexicana
 
 3. Entendiendo las placas de tu País
+
     La primera cosa que necesitas saber es cuántas fuentes de placas tiene tu país. En EU, por ejemplo, muchos estados usan muchas fuentes diferentes para sus placas. Algunos países sólo usan una fuente. 
     Cada fuente necesita ser entrenada separadamente. Usted no quiere combinar los carácteres de las fuentes, esto decrementará su precisión. Después de que cada fuente es entrenada, pueden ser combinadas dentro de un "dataset" (conjunto de datos) para su país entero.
 
 4. Creando los moldes de carácteres
+
     Cuando estés listo para empezar el entramiento, necesitaremos crear una librería de moldes de los carácteres. Cada molde es un archivo de imagen pequeña que contiene el "black-and-white" (el negro y blanco) del caracter y es nombrado después.
     Necesitaremos varios de estos moldes por cada caracter y fuente. Los moldes de caracteres serán ligeramente diferentes, esto es necesario para que el entramiento de OCR pueda entender como detectar los carácteres.
     
 5. Produciendo los moldes
+
     Hay dos formas de producir los moldes de carácteres
     **En México no se utilizan las letras I-Ñ-O-Q** 
       
       1. Usando imágenes actuales de las placas (Hay que tener en cuenta que las imágenes deben de ser de fondo claro y carácteres negros, porque tiene problemas al reconocerlas, así que se pueden someter a un tratamiento para invertir colores).   
       2. Usando una fuente TTF que luzca como la fuente de las placas.
+
          **Esta opción ya no está soportada en la versión más reciente de openalpr-utils (2.2.4-1build1)
 
 ### Produciendo moldes de placas actuales
+
 Debemos recolectar una librería grande de imágenes de placas (al menos 100), asegurándonos que cada imagen tenga al menos 250px.
 La relación de aspecto debe coincidir con la configuración de ancho/alto para las placas, y estas imágenes deberán estar recortadas alrededor de las placas.
  (El programa [Imageclipper], Repositorio separado es de ayuda para recortar un número grande de imágenes). Guarda las imágenes en formato png.
@@ -127,6 +136,7 @@ Para cada placa, hay buenos carácteres y malos carácteres. Querrá escoger los
 5. Repetir los pasos hasta que se haya terminado, y presionar "n" para moverse a la siguiente placa y repetir los pasos para clasificar.
          
 ### Produciendo moldes desde un TTF Font (fuente TTF)
+
 ****Esta opción ya no me aparece soportada en la versión que tengo de openalpr-utils (2.2.4-1build1)**
         Necesitaremos agregar algunas distorsiones realistas para los carácteres. Esto es necesario para hacer robusto el detector OCR.
            
@@ -145,6 +155,7 @@ Proporcione al programa el archivo de texto del paso 3, así como cada archivo d
           
 
 6. Construyendo una hoja de entrenamiento de Tesseract
+
      Una vez que haz clasificado todos los caracteres, puede ser una buena idea escanear el directorio para asegurarse de que las clasificaciones coincidan con las imágenes.
 El nombre de cada imagen debe de llevar al inicio el caracter que representa. Después de esto, necesitarás crear una hoja de entrenamiento.
 Hay una herramienta en OpenALPR "openalpr-utils-prepcharsfortraining" que creará la hoja de entramiento de Tesseract por ti. Ejecutamos el siguiente comando:
@@ -157,6 +168,7 @@ Hay una herramienta en OpenALPR "openalpr-utils-prepcharsfortraining" que crear�
      Renombrar estos archivos ("`leu.germany.expo0.box`") para que coincida con el nombre que usa Tesseract
 
 7. Terminando de entrenar OCR
+
      Por último, usaremos los archivos box/tif creados anteriormente para entrenar OCR con las placas del país. 
      Crea un nuevo directorio usando el codigo de país, después crea un directorio de entrada "(input)" dentro del directorio anterior. 
      Copie todos los archivos box/tif creados en los pasos anteriores dentro de este directorio.
