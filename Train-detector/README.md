@@ -45,7 +45,15 @@ Todo lo siguiente fue tomado de [GitHub].
 Las **imágenes negativas**, solo son imagenes en "raw" que no tienen nada que ver con placas
 Tarda un poco en clonar el repositorio
 
-Hay que poner la dirección de OPENCV en el archivo de python
+Hay que poner la dirección de OPENCV en el archivo de python, en mi caso: 
+
+```sh
+OPENCV_DIR= '/usr/local/bin'
+SAMPLE_CREATOR = OPENCV_DIR + '/opencv_createsamples'
+
+BASE_DIR = '/home/denisse/Documentos/Training_Detector/train-detector/'
+
+```
 ```sh
 'BASE_DIR' = nombre del directorio donde estás trabajando
 'raw-neg' = directorio de entrada de imágenes negativas
@@ -54,6 +62,7 @@ Hay que poner la dirección de OPENCV en el archivo de python
 'positive' = directiorio de salida de imágenes positivas
 'WIDTH', 'HEIGHT' = estan en cm
 ```
+
 Para encontrar las direcciones usé el comando find en ubuntu
 
 # numPos y numStages
