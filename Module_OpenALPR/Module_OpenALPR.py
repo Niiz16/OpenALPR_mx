@@ -43,7 +43,11 @@ def numplate(image_path, num_coincidence = 10):
 if __name__ == '__main__':
     import sys
     
-    image_path = sys.argv[1]
-   # result = numplate(image_path)
-    print(image_path)
-#    print(result)
+    if len(sys.argv) > 1:
+        image_path = sys.argv[1]
+        result = numplate(image_path)
+        print(image_path)
+        print(result)
+
+    else:
+        print("Ejemplo de uso: python Module_OpenALPR.py 1.jpg 10 \nDonde 1.jpg (Campo obligatorio) es el path de la imagen, y 10 (este campo no es obligatorio, por default esta en 10) es el numero de patrones posibles que se analizaran y entregara unicamente los que coincidan con la configuracion de patrones del pais")
